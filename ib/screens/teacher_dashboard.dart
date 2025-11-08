@@ -3,6 +3,8 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:uuid/uuid.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'compose.dart';
+
 class TeacherDashboard extends StatefulWidget {
   const TeacherDashboard({super.key});
   @override State<TeacherDashboard> createState() => _TeacherDashboardState();

@@ -40,3 +40,7 @@ class _StudentFeedState extends State<StudentFeed> {
     );
   }
 }
+
+extension on BarcodeCapture {
+  get rawValue => null;
+}

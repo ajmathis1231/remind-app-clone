@@ -11,7 +11,7 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Remind Clone', style: Theme.of(context).textTheme.headline3),
+            Text('Remind Clone', style: Theme.of(context).textTheme.displaySmall),
             const SizedBox(height: 40),
             ElevatedButton(
               onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const TeacherDashboard())),

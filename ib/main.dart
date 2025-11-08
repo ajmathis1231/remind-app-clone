@@ -2,15 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'screens/login.dart';
+//
+// void main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Supabase.initialize(
+//     url: 'https://remind-ajmathis1231.supabase.co',
+//     anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJlbWluZC1ham1hdGhpczEyMzEiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTczMDg1NzYwMCwiZXhwIjoyMDQ2NDMzNjAwfQ.9vX8zL5kPqRj7sT2uV0wXyZaBcDeFgHiJkLmNoPqRs',
+//   );
+//   runApp(const RemindApp());
+// }
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+//
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+Future<void> main() async {
   await Supabase.initialize(
-    url: 'https://remind-ajmathis1231.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJlbWluZC1ham1hdGhpczEyMzEiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTczMDg1NzYwMCwiZXhwIjoyMDQ2NDMzNjAwfQ.9vX8zL5kPqRj7sT2uV0wXyZaBcDeFgHiJkLmNoPqRs',
+    url: 'http://127.0.0.1:54321',
+    anonKey: 'sb_publishable_ACJWlzQHlZjBrEguHvfOxg_3BJgxAaH',
   );
   runApp(const RemindApp());
 }
+
 
 class RemindApp extends StatelessWidget {
   const RemindApp({super.key});
