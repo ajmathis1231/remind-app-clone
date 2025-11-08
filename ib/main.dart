@@ -1,38 +1,92 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'screens/login.dart';
-//
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Supabase.initialize(
-//     url: 'https://remind-ajmathis1231.supabase.co',
-//     anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJlbWluZC1ham1hdGhpczEyMzEiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTczMDg1NzYwMCwiZXhwIjoyMDQ2NDMzNjAwfQ.9vX8zL5kPqRj7sT2uV0wXyZaBcDeFgHiJkLmNoPqRs',
-//   );
-//   runApp(const RemindApp());
-// }
+import 'screens/VerificationPendingScreen.dart';
+import 'screens/student_login.dart';
+import 'screens/teacher_login.dart';
 
-//
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await Supabase.initialize(
-    url: 'http://127.0.0.1:54321',
-    anonKey: 'sb_publishable_ACJWlzQHlZjBrEguHvfOxg_3BJgxAaH',
+      url: 'https://dhxudkeopzminirznkon.supabase.co',
+      anonKey: 'sb_publishable_uxEEPU4pOkfyGqhVXqcSVg_wgbK3Rgg',
+      debug: true
   );
   runApp(const RemindApp());
 }
 
 
-class RemindApp extends StatelessWidget {
+
+class RemindApp extends StatefulWidget {
   const RemindApp({super.key});
+
+  @override
+  State<RemindApp> createState() => _RemindAppState();
+}
+
+class _RemindAppState extends State<RemindApp> {
+  @override
+  void initState() {
+    super.initState();
+    Supabase.instance.client.auth.onAuthStateChange.listen((data) {
+      final AuthChangeEvent event = data.event;
+      final Session? session = data.session;
+
+      print('Auth State Change: $event');
+      if (session != null) {
+        print('User ID: ${session.user.id}');
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Remind Clone',
       theme: ThemeData(primarySwatch: Colors.purple),
-      home: const LoginScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomeScreen(),
+        '/teacher-login': (context) => const TeacherLoginScreen(),
+        '/student-login': (context) => const StudentLoginScreen(),
+        '/verification-pending': (context) => const VerificationPendingScreen(),
+      },
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Welcome to Remind'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/teacher-login');
+              },
+                child: const Text('I am a Teacher'),
+              ),
+
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/student-login');
+              },
+              child: const Text('I am a Student/Parent'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
